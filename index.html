@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Rifki ❤️</title>
+
+<style>
+:root{
+    --pink:#ff4f9a;
+    --soft:#ffd6e8;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ff9acb,var(--soft));
+    font-family:'Comic Sans MS',cursive;
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+    height:100vh;
+    width:100vw;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+}
+
+.active{
+    display:flex;
+    flex-direction:column;
+}
+
+.card{
+    background:white;
+    width:100%;
+    max-width:360px;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 15px 30px rgba(0,0,0,.25);
+    text-align:center;
+    position:relative;
+    animation:pop 1s ease;
+}
+
+.ribbon{
+    position:absolute;
+    top:-14px;
+    left:-14px;
+    background:var(--pink);
+    color:white;
+    padding:10px 22px;
+    border-radius:0 0 18px 0;
+    font-size:14px;
+}
+
+h1{
+    color:var(--pink);
+    animation:glow 2s infinite;
+    margin-bottom:5px;
+}
+
+p{
+    color:#ff6fae;
+    font-size:16px;
+    min-height:90px;
+}
+
+img{
+    width:100%;
+    max-width:220px;
+    border-radius:20px;
+    margin:15px 0;
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+button{
+    margin-top:15px;
+    padding:10px 22px;
+    border:none;
+    border-radius:15px;
+    background:var(--pink);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.love{
+    font-size:28px;
+    animation:heartbeat 1.2s infinite;
+}
+
+/* Animasi */
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes glow{
+    0%{text-shadow:0 0 5px #ff9acb}
+    50%{text-shadow:0 0 20px var(--pink)}
+    100%{text-shadow:0 0 5px #ff9acb}
+}
+@keyframes heartbeat{
+    0%,50%,100%{transform:scale(1)}
+    25%,75%{transform:scale(1.2)}
+}
+
+/* bunga & confetti */
+.fall{
+    position:absolute;
+    font-size:22px;
+    animation:fall 6s linear infinite;
+}
+@keyframes fall{
+    0%{top:-10vh;opacity:1}
+    100%{top:110vh;opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIK -->
+<audio autoplay loop>
+  <source src="hindia-everything-u-are.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <div class="ribbon">🎀 6 Januari 🎀</div>
+    <h1>Happy Birthday 🎂</h1>
+    <p id="text1"></p>
+    <div class="love">💗 💖 💗</div>
+    <button onclick="nextPage(2)">Klik Lanjut 💝</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="card">
+    <div class="ribbon">🌸 My Love 🌸</div>
+    <h1 id="name"></h1>
+    <img src="C:\Users\Asusv\Downloads\WhatsApp Image 2025-12-19 at 22.29.29.jpeg">
+    <p id="text2"></p>
+    <button onclick="nextPage(3)">Lanjut 💞</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <div class="card">
+    <div class="ribbon">💖 Forever 💖</div>
+    <h1>I Love You</h1>
+    <p id="text3"></p>
+    <div class="love">💘 💕 💘</div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const nama = "Rifki Amirudin";
+const tanggal = "6 Januari";
+
+document.getElementById("name").innerText = nama + " 💕";
+
+const texts = {
+  1:`Happy birthday sayanggkuu 💗
+     di tanggal ${tanggal} ini semoga kamu selalu bahagia.`,
+  2:`Terima kasih ${nama},
+     kamu adalah hadiah terindah dan rumah ternyaman 🌸`,
+  3:`Semoga aku selalu bisa menemani langkahmu,
+     hari ini dan seterusnya 💖`
+};
+
+// ===== PAGE =====
+function nextPage(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page"+n).classList.add("active");
+  typing(n);
+}
+
+// ===== TYPING EFFECT =====
+function typing(n){
+  const el=document.getElementById("text"+n);
+  el.innerHTML="";
+  let i=0;
+  const t=texts[n];
+  const inter=setInterval(()=>{
+    el.innerHTML+=t[i];
+    i++;
+    if(i>=t.length) clearInterval(inter);
+  },55);
+}
+typing(1);
+
+// ===== CONFETTI & FLOWER =====
+function drop(){
+  const d=document.createElement("div");
+  d.classList.add("fall");
+  d.innerHTML=Math.random()>0.5?"🎆":"🌸";
+  d.style.left=Math.random()*100+"vw";
+  d.style.animationDuration=(4+Math.random()*4)+"s";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),8000);
+}
+setInterval(drop,300);
+</script>
+
+</body>
+</html>
